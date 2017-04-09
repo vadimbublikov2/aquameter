@@ -18,7 +18,7 @@ public class Main {
 
 
         Aquarium aquarium = new Aquarium(inputStr);
-        int volume = aquarium.calcVolume();
+        long volume = aquarium.calcVolume();
         System.out.println();
         System.out.println("Aquarium volume = " + volume);
     }

@@ -2,6 +2,8 @@ package ru.bvd.aquameter;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class AquariumTest {
@@ -89,6 +91,66 @@ public class AquariumTest {
         Aquarium aquarium = new Aquarium("3 1 0 3 1 4 1 2");
         assertEquals(3, aquarium.calcVolume());
 
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testMain15 () {
+        Aquarium aquarium = new Aquarium("3 -1 0 3 1 4 1 2");
+        assertEquals(3, aquarium.calcVolume());
+
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testMain16 () {
+        Aquarium aquarium = new Aquarium("3 1.8 0 3 1 4 1 2");
+        assertEquals(3, aquarium.calcVolume());
+
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testMain17 () {
+        Aquarium aquarium = new Aquarium("3 1,8 0 3 1 4 1 2");
+        assertEquals(3, aquarium.calcVolume());
+
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testMain18 () {
+        Aquarium aquarium = new Aquarium("3 70000 0 3 1 4 1 2");
+        assertEquals(3, aquarium.calcVolume());
+
+    }
+    @Test
+    public void testMain19 () {
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<65535; i++) {
+            sb.append( String.valueOf( r.nextInt(65535) ) ).append(" ");
+        }
+        sb.setLength( sb.length()-1 );
+
+        Aquarium aquarium = new Aquarium(sb.toString());
+        boolean flag = false;
+        if (aquarium.calcVolume()>0) {
+            flag = true;
+        }
+
+        assertEquals(true, flag);
+
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testMain20 () {
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<70000; i++) {
+            sb.append( String.valueOf( r.nextInt(65535) ) ).append(" ");
+        }
+        sb.setLength( sb.length()-1 );
+
+        Aquarium aquarium = new Aquarium(sb.toString());
+    }
+
+
+    public static void main(String[] args) {
+        AquariumTest at = new AquariumTest();
+        at.testMain18();
     }
 
 }

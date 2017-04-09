@@ -17,6 +17,9 @@ class Aquarium {
     }
     //проверка длины больше 1 что-то с нулями делать
     int calcVolume() {
+        if (columnsSize.length==1)
+            return 0;
+
         int volumeAquarium = 0;
         int closeIndex = 0;
         int openIndex;
@@ -38,7 +41,7 @@ class Aquarium {
                     break;
                 }
             }
-            if (lastOpenIndex==openIndex)
+            if ( (lastOpenIndex==openIndex) && (openIndex>0) )
                 break;
 
             for (int k=openIndex+1;k<columnsSize.length;k++) {

@@ -20,7 +20,7 @@ public class AquariumTest {
     }
     @Test
     public void testMain3 () {
-        Aquarium aquarium = new Aquarium("4 3 2 1 0 1 2 3 4 ");
+        Aquarium aquarium = new Aquarium("4 3 2 1 0 1 2 3 4");
         assertEquals(0, aquarium.calcVolume());
 
     }

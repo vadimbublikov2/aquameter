@@ -25,21 +25,35 @@ class Aquarium {
 
         int volumeAquarium = 0;
         int closeIndex = 0;
-        int openIndex;
+        int openIndex = 0;
 
         int lastOpenIndex;
         int lastCloseIndex;
         while (true) {
-            openIndex = closeIndex;
-            //очистка от одиночного максимума
-            int[] columnsSort = Arrays.copyOf(columns, columns.length);
-            Arrays.sort(columnsSort);
-            if (columnsSort[columns.length-1] != columnsSort[columns.length-2] ) {
-                columns[ Arrays.binarySearch( columns, columnsSort[columns.length-1] ) ] = columnsSort.length-2 ;
-            }
-
-            //ищем начало следующего вхождения подаквариума
             lastOpenIndex = openIndex;
+            openIndex = closeIndex;
+            if (openIndex==(columns.length-1))
+                break;
+
+            //-->очистка от одиночного максимума
+            int[] columnsSort = Arrays.copyOfRange(columns, openIndex, columns.length);
+            Arrays.sort(columnsSort);
+            if (columnsSort[columnsSort.length-1] != columnsSort[columnsSort.length-2] ) {
+                System.out.println();
+                System.out.println("single max = " + columnsSort[columnsSort.length-1]);
+                for(int i=openIndex; i<columns.length; i++) {
+                    if (columns[i]==columnsSort[columnsSort.length-1]) {
+                        columns[i] = columnsSort[columnsSort.length - 2];
+                        break;
+                    }
+                }
+                System.out.println("after clear max");
+                for (int i=0; i<columns.length;i++)
+                    System.out.print( columns[i] + "[" + i + "] " );
+            }
+            //<--
+
+            //-->ищем начало следующего вхождения подаквариума
             System.out.println();
             System.out.println(openIndex);
             for (int i = openIndex; i < columns.length; i++) {
@@ -52,8 +66,9 @@ class Aquarium {
                     break;
                 }
             }
+            //<--
 
-            //ищем конец вхождения подаквариума
+            //-->ищем конец вхождения подаквариума
             for (int k=openIndex+1;k<columns.length;k++) {
                 closeIndex = openIndex + 1;
                 lastCloseIndex = closeIndex;
@@ -70,9 +85,10 @@ class Aquarium {
                 } else
                     break;
             }
+            //<--
 
             //выход, если начало следующего вхождение не найдено
-            if ( (lastOpenIndex==openIndex) && (openIndex>0)  )
+            if ( ((lastOpenIndex==openIndex) && (openIndex>0)) || (openIndex==closeIndex)  )
                 break;
 
             System.out.println();

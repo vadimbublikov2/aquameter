@@ -78,4 +78,17 @@ public class AquariumTest {
         assertEquals(14, aquarium.calcVolume());
 
     }
+    @Test
+    public void testMain13 () {
+        Aquarium aquarium = new Aquarium("3 1 1 2 1 4");
+        assertEquals(7, aquarium.calcVolume());
+
+    }
+    @Test
+    public void testMain14 () {
+        Aquarium aquarium = new Aquarium("3 1 0 3 1 4 1 2");
+        assertEquals(3, aquarium.calcVolume());
+
+    }
+
 }

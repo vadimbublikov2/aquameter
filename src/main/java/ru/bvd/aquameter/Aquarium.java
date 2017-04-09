@@ -1,4 +1,4 @@
-package ru.bvd.aquametr;
+package ru.bvd.aquameter;
 
 import java.util.Arrays;
 
@@ -29,6 +29,8 @@ class Aquarium {
             System.out.println();
             System.out.println(openIndex);
             for (int i = openIndex; i < columnsSize.length; i++) {
+                if (columnsSize.length<(i+2))
+                    break;
                 if (columnsSize[i] == 0)
                     continue;
                 if (columnsSize[i] > columnsSize[i + 1]) {

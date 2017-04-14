@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class Aquarium {
     private int[] columnsSize;
-    private final String errText = "Строка должна содержать не более 65535 целых неотрицательных чисел (от 0 до 65535).";
+    private final String errText = "Строка должна содержать от 1 до 65535 целых неотрицательных чисел (от 0 до 65535).";
 
     Aquarium(String inputStr) {
         if ( inputStr.contains("-") || inputStr.contains(".") || inputStr.contains(",")  ) {
@@ -19,7 +19,7 @@ class Aquarium {
             columnsSize[i] = Integer.parseInt( inputStrArr[i] );
             if (columnsSize[i]>65535)
                 throw new IllegalArgumentException(errText + "Элемент с индексом " + i + "содержит = " + columnsSize[i]);
-//            System.out.print( columnsSize[i] + "[" + i + "] " );
+            //System.out.print( columnsSize[i] + "[" + i + "] " );
         }
     }
 
@@ -45,23 +45,23 @@ class Aquarium {
             int[] columnsSort = Arrays.copyOfRange(columns, openIndex, columns.length);
             Arrays.sort(columnsSort);
             if (columnsSort[columnsSort.length-1] != columnsSort[columnsSort.length-2] ) {
-//                System.out.println();
-//                System.out.println("single max = " + columnsSort[columnsSort.length-1]);
+                //System.out.println();
+                //System.out.println("single max = " + columnsSort[columnsSort.length-1]);
                 for(int i=openIndex; i<columns.length; i++) {
                     if (columns[i]==columnsSort[columnsSort.length-1]) {
                         columns[i] = columnsSort[columnsSort.length - 2];
                         break;
                     }
                 }
-//                System.out.println("after clear max");
-//                for (int i=0; i<columns.length;i++)
-//                    System.out.print( columns[i] + "[" + i + "] " );
+                //System.out.println("after clear max");
+                //for (int i=0; i<columns.length;i++)
+                //    System.out.print( columns[i] + "[" + i + "] " );
             }
             //<--
 
             //-->ищем начало следующего вхождения подаквариума
-//            System.out.println();
-//            System.out.println(openIndex);
+            //System.out.println();
+            //System.out.println(openIndex);
             for (int i = openIndex; i < columns.length; i++) {
                 if (columns.length<(i+2))
                     break;
@@ -97,9 +97,9 @@ class Aquarium {
             if ( ((lastOpenIndex==openIndex) && (openIndex>0)) || (openIndex==closeIndex)  )
                 break;
 
-//            System.out.println();
-//            System.out.println("columns open  index = " + openIndex + " val = " + columns[openIndex]);
-//            System.out.println("columns close index = " + closeIndex + " val = " + columns[closeIndex]);
+            //System.out.println();
+            //System.out.println("columns open  index = " + openIndex + " val = " + columns[openIndex]);
+            //System.out.println("columns close index = " + closeIndex + " val = " + columns[closeIndex]);
 
             volumeAquarium += calcVolumeSubAquarium(Arrays.copyOfRange(columns, openIndex, closeIndex + 1));
         }
@@ -109,14 +109,14 @@ class Aquarium {
     private long calcVolumeSubAquarium (int[] subAquarium) {
         long volumeSubAquarium = 0;
         int heightWater = Math.min(subAquarium[0], subAquarium[subAquarium.length-1]);
-//        for (int i=0; i<subAquarium.length; i++)
-//            System.out.print( subAquarium[i] + "["+i+"] " );
+        //for (int i=0; i<subAquarium.length; i++)
+        //    System.out.print( subAquarium[i] + "["+i+"] " );
         for (int i=1 ; i<subAquarium.length-1; i++) {
             volumeSubAquarium += (heightWater - subAquarium[i]);
         }
-//        System.out.println();
-//        System.out.println("height water = " + heightWater);
-//        System.out.println("volume sub aquarium = " + volumeSubAquarium);
+        //System.out.println();
+        //System.out.println("height water = " + heightWater);
+        //System.out.println("volume sub aquarium = " + volumeSubAquarium);
 
         return volumeSubAquarium;
     }

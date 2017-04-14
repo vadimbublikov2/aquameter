@@ -14,7 +14,7 @@ public class Main {
         } else {
             inputStr = args[0];
         }
-        System.out.println(inputStr);
+        //System.out.println(inputStr);
 
 
         Aquarium aquarium = new Aquarium(inputStr);
